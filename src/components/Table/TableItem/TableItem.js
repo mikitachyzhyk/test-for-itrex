@@ -3,12 +3,12 @@ export default function Table({ user }) {
 
   return (
     <tr>
-      <th>{id}</th>
-      <th>{firstName}</th>
-      <th>{lastName}</th>
-      <th>{email}</th>
-      <th>{phone}</th>
-      <th>{state}</th>
+      <td>{id}</td>
+      <td>{firstName}</td>
+      <td>{lastName}</td>
+      <td>{email}</td>
+      <td>{phone}</td>
+      <td>{state}</td>
     </tr>
   )
 }

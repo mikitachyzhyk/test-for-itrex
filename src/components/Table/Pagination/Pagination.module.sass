@@ -1,0 +1,31 @@
+.container
+  display: flex
+  margin: 0
+  padding: 0
+  list-style-type: none
+
+.item
+  display: flex
+  align-items: center
+  min-width: 32px
+  height: 32px
+  padding: 0 12px
+  text-align: center
+  font-size: 13px
+  background: #eee
+  color: black
+  border-radius: 16px
+  cursor: pointer
+  user-select: none
+  &:not(:last-child)
+    margin-right: 4px
+  &:hover
+    background: #aaa
+
+.disabled
+  color: rgba(black, 0.3)
+  pointer-events: none
+
+.activeItem
+  background: #aaa
+  pointer-events: none
