@@ -1,20 +1,26 @@
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './App.css'
+import Table from './components/Table/Table'
 
 function App() {
-  const loadUsers = async () => {
-    const response = await fetch(
-      'https://itrex-react-lab-files.s3.eu-central-1.amazonaws.com/react-test-api.json'
-    )
-    const users = await response.json()
-    console.log('Users loaded', users)
-    return users
-  }
+  const [users, setUsers] = useState([])
 
-  const [users, setUsers] = useState({})
-
+  // https://designcode.io/react-hooks-handbook-fetch-data-from-an-api
   useEffect(() => {
-    setUsers(loadUsers())
+    const url =
+      'https://itrex-react-lab-files.s3.eu-central-1.amazonaws.com/react-test-api.json'
+
+    const loadUsers = async () => {
+      try {
+        const response = await fetch(url)
+        const users = await response.json()
+        setUsers(users.sort((user1, user2) => user1.id - user2.id))
+      } catch (err) {
+        console.error(err)
+      }
+    }
+
+    loadUsers()
   }, [])
 
   return (
@@ -24,11 +30,7 @@ function App() {
         <div>Filter</div>
       </div>
 
-      <table>
-        <caption>Table Caption</caption>
-      </table>
-
-      <div>pagination</div>
+      <Table users={users} />
 
       <div>Info about user</div>
     </div>
