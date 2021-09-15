@@ -1,5 +1,12 @@
 export default function Table({ user }) {
-  const { id, firstName, lastName, email, phone, state } = user
+  const {
+    id,
+    firstName,
+    lastName,
+    email,
+    phone,
+    adress: { state },
+  } = user
 
   return (
     <tr>
