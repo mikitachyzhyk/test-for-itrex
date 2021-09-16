@@ -5,10 +5,34 @@ $bdColor: #999
   border: 1px solid $bdColor
   border-collapse: collapse
 
-  th
-    text-align: left
-
   th, td
-    padding: 10px
     border: 1px solid $bdColor
     cursor: pointer
+
+  th
+    padding: 10px 13px 10px 10px
+    text-align: left
+    user-select: none
+
+  td
+    padding: 10px
+
+.sortedAsc, .sortedDesc
+  position: relative
+  &::after
+    content: ''
+    position: absolute
+    width: 8px
+    height: 10px
+    border: 5px solid transparent
+    border-left-width: 4px
+    border-right-width: 4px
+    border-top-color: white
+
+.sortedAsc
+  &::after
+    transform: translateY(75%) translateX(6px)
+
+.sortedDesc
+  &::after
+    transform: translateY(25%) translateX(6px) rotate(180deg)

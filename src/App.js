@@ -3,6 +3,18 @@ import Table from './components/Table/Table'
 
 function App() {
   const [users, setUsers] = useState([])
+  const [sorting, setSorting] = useState({
+    field: 'id',
+    order: 'ASC',
+  })
+  const [fieldNames] = useState({
+    id: 'id',
+    firstName: 'First name',
+    lastName: 'Last name',
+    email: 'Email',
+    phone: 'Phone',
+    state: 'State',
+  })
 
   // https://designcode.io/react-hooks-handbook-fetch-data-from-an-api
   useEffect(() => {
@@ -36,6 +48,8 @@ function App() {
         return sort(user1[field], user2[field], order)
       })
     )
+
+    setSorting({ field, order })
   }
 
   return (
@@ -45,7 +59,12 @@ function App() {
         <div>Filter</div>
       </div>
 
-      <Table users={users} sortUsers={sortUsers} />
+      <Table
+        users={users}
+        sortUsers={sortUsers}
+        sorting={sorting}
+        fieldNames={fieldNames}
+      />
 
       <div>Info about user</div>
     </div>

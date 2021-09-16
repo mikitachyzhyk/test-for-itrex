@@ -5,7 +5,7 @@ import styles from './Table.module.sass'
 
 const pageSize = 20
 
-export default function Table({ users, sortUsers }) {
+export default function Table({ users, sortUsers, sorting, fieldNames }) {
   const [currentPage, setCurrentPage] = useState(1)
 
   const currentTableData = useMemo(() => {
@@ -14,16 +14,13 @@ export default function Table({ users, sortUsers }) {
     return users.slice(firstPageIndex, lastPageIndex)
   }, [users, currentPage])
 
-  // TODO: state to store ASC, DESC values
-
   const handleClick = (field) => {
-    return (e) => {
-      if (e.target.dataset.sort === 'ASC') {
-        // e.target.dataset.sort = 'DESC'
+    return () => {
+      if (sorting.field === field && sorting.order === 'ASC') {
         sortUsers(field, 'DESC')
+        return
       }
 
-      // e.target.dataset.sort = 'ASC'
       sortUsers(field)
     }
   }
@@ -33,12 +30,21 @@ export default function Table({ users, sortUsers }) {
       <table className={styles.container}>
         <thead>
           <tr>
-            <th onClick={handleClick('id')}>id</th>
-            <th onClick={handleClick('firstName')}>First name</th>
-            <th onClick={handleClick('lastName')}>Last name</th>
-            <th onClick={handleClick('email')}>Email</th>
-            <th onClick={handleClick('phone')}>Phone</th>
-            <th onClick={handleClick('state')}>State</th>
+            {Object.entries(fieldNames).map((field, i) => (
+              <th
+                key={i}
+                onClick={handleClick(field[0])}
+                className={
+                  field[0] === sorting.field
+                    ? sorting.order === 'ASC'
+                      ? styles.sorted + ' ' + styles.sortedAsc
+                      : styles.sorted + ' ' + styles.sortedDesc
+                    : null
+                }
+              >
+                {field[1]}
+              </th>
+            ))}
           </tr>
         </thead>
         <tbody>
