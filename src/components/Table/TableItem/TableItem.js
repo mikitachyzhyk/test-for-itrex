@@ -1,4 +1,4 @@
-export default function Table({ user }) {
+export default function Table({ user, index, setCurrentUserIndex }) {
   const {
     id,
     firstName,
@@ -8,8 +8,12 @@ export default function Table({ user }) {
     adress: { state },
   } = user
 
+  function handleClick(e) {
+    setCurrentUserIndex(e.currentTarget.dataset.index)
+  }
+
   return (
-    <tr>
+    <tr data-index={index} onClick={handleClick}>
       <td>{id}</td>
       <td>{firstName}</td>
       <td>{lastName}</td>

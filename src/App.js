@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import Filter from './components/Filter/Filter'
 import Search from './components/Search/Search'
 import Table from './components/Table/Table'
+import styles from './App.module.sass'
+import ProfileInfo from './components/ProfileInfo/ProfileInfo'
 
 function App() {
   const [originalUsers, setOriginalUsers] = useState([])
@@ -86,9 +88,11 @@ function App() {
     setSorting({ field, order })
   }
 
+  const [currentUserIndex, setCurrentUserIndex] = useState(1)
+
   return (
-    <div className="container">
-      <div>
+    <div className={styles.container}>
+      <div className={styles.topSection}>
         <Search
           searchText={searchText}
           handleSearchTextChange={handleSearchTextChange}
@@ -105,9 +109,12 @@ function App() {
         sortUsers={sortUsers}
         sorting={sorting}
         fieldNames={fieldNames}
+        setCurrentUserIndex={setCurrentUserIndex}
       />
 
-      <div>Info about user</div>
+      {currentUserIndex && users.length ? (
+        <ProfileInfo currentUser={users[currentUserIndex]} />
+      ) : null}
     </div>
   )
 }

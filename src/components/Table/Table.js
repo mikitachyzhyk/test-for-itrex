@@ -5,7 +5,13 @@ import styles from './Table.module.sass'
 
 const pageSize = 20
 
-export default function Table({ users, sortUsers, sorting, fieldNames }) {
+export default function Table({
+  users,
+  sortUsers,
+  sorting,
+  fieldNames,
+  setCurrentUserIndex,
+}) {
   const [currentPage, setCurrentPage] = useState(1)
 
   const currentTableData = useMemo(() => {
@@ -47,9 +53,15 @@ export default function Table({ users, sortUsers, sorting, fieldNames }) {
             ))}
           </tr>
         </thead>
+
         <tbody>
           {currentTableData.map((user, i) => (
-            <TableItem key={i} user={user} />
+            <TableItem
+              key={i}
+              user={user}
+              index={i}
+              setCurrentUserIndex={setCurrentUserIndex}
+            />
           ))}
         </tbody>
       </table>
