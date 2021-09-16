@@ -1,15 +1,20 @@
 export default function ProfileInfo({ currentUser }) {
+  const {
+    firstName,
+    lastName,
+    description,
+    adress: { streetAddress, city, state, zip },
+  } = currentUser
+
   return (
     <div>
       <div>Profile info:</div>
-      <div>
-        Selected profile: {`${currentUser.firstName} ${currentUser.lastName}`}
-      </div>
-      <div>Description: {currentUser.description}</div>
-      <div>Address: {currentUser.adress.streetAddress}</div>
-      <div>City: {currentUser.adress.city}</div>
-      <div>State: {currentUser.adress.state}</div>
-      <div>Index: {currentUser.adress.zip}</div>
+      <div>Selected profile: {`${firstName} ${lastName}`}</div>
+      <div>Description: {description}</div>
+      <div>Address: {streetAddress}</div>
+      <div>City: {city}</div>
+      <div>State: {state}</div>
+      <div>Index: {zip}</div>
     </div>
   )
 }
