@@ -55,8 +55,12 @@ function App() {
     setUsers(
       originalUsers.filter(
         (user) =>
-          (user.firstName.toLowerCase().includes(searchText.toLowerCase()) ||
-            user.lastName.toLowerCase().includes(searchText.toLowerCase())) &&
+          (user.firstName
+            .toLowerCase()
+            .includes(searchText.trim().toLowerCase()) ||
+            user.lastName
+              .toLowerCase()
+              .includes(searchText.trim().toLowerCase())) &&
           user.adress.state.toLowerCase().includes(currentState.toLowerCase())
       )
     )
