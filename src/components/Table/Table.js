@@ -10,7 +10,7 @@ export default function Table({
   sortUsers,
   sorting,
   fieldNames,
-  setCurrentUserIndex,
+  setCurrentUser,
 }) {
   const [currentPage, setCurrentPage] = useState(1)
 
@@ -60,7 +60,7 @@ export default function Table({
               key={i}
               user={user}
               index={i}
-              setCurrentUserIndex={setCurrentUserIndex}
+              setCurrentUser={setCurrentUser}
             />
           ))}
         </tbody>

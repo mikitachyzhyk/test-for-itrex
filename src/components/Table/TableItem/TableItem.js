@@ -1,4 +1,4 @@
-export default function Table({ user, index, setCurrentUserIndex }) {
+export default function Table({ user, index, setCurrentUser }) {
   const {
     id,
     firstName,
@@ -9,7 +9,7 @@ export default function Table({ user, index, setCurrentUserIndex }) {
   } = user
 
   function handleClick(e) {
-    setCurrentUserIndex(e.currentTarget.dataset.index)
+    setCurrentUser(user)
   }
 
   return (

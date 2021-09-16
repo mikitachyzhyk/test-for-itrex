@@ -88,7 +88,7 @@ function App() {
     setSorting({ field, order })
   }
 
-  const [currentUserIndex, setCurrentUserIndex] = useState(1)
+  const [currentUser, setCurrentUser] = useState(null)
 
   return (
     <div className={styles.container}>
@@ -109,12 +109,10 @@ function App() {
         sortUsers={sortUsers}
         sorting={sorting}
         fieldNames={fieldNames}
-        setCurrentUserIndex={setCurrentUserIndex}
+        setCurrentUser={setCurrentUser}
       />
 
-      {currentUserIndex && users.length ? (
-        <ProfileInfo currentUser={users[currentUserIndex]} />
-      ) : null}
+      {currentUser ? <ProfileInfo currentUser={currentUser} /> : null}
     </div>
   )
 }
