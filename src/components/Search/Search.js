@@ -1,6 +1,8 @@
+import styles from './Search.module.sass'
+
 export default function Search({ searchText, handleSearchTextChange }) {
   return (
-    <div>
+    <div className={styles.container}>
       <input
         type="text"
         value={searchText}
