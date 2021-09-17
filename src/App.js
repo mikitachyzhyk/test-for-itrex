@@ -113,10 +113,24 @@ function App() {
         sortUsers={sortUsers}
         sorting={sorting}
         fieldNames={fieldNames}
+        currentUser={currentUser}
         setCurrentUser={setCurrentUser}
       />
 
       {currentUser ? <ProfileInfo currentUser={currentUser} /> : null}
+
+      <footer className={styles.footer}>
+        <div>
+          Created by:{' '}
+          <a
+            target="_blank"
+            rel="noreferrer"
+            href="https://github.com/mikitachyzhyk"
+          >
+            mikitachyzhyk
+          </a>
+        </div>
+      </footer>
     </div>
   )
 }

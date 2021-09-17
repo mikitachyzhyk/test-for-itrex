@@ -1,5 +1,8 @@
+@import '../../../_variables'
+
 .container
   display: flex
+  justify-content: flex-end
   margin: 0
   padding: 0
   list-style-type: none
@@ -12,20 +15,22 @@
   padding: 0 12px
   text-align: center
   font-size: 13px
-  background: #eee
-  color: black
+  background: white
+  // border-bottom: 1px solid $bdColor
   border-radius: 16px
   cursor: pointer
   user-select: none
+  transition: opacity 150ms
   &:not(:last-child)
-    margin-right: 4px
+    margin-right: 8px
   &:hover
-    background: #aaa
+    transition: opacity 0ms
+    opacity: 0.65
 
 .disabled
-  color: rgba(black, 0.3)
+  color: rgba($textColor, 0.4)
   pointer-events: none
 
 .activeItem
-  background: #aaa
+  background: transparent
   pointer-events: none

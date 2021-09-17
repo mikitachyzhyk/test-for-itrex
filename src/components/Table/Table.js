@@ -10,6 +10,7 @@ export default function Table({
   sortUsers,
   sorting,
   fieldNames,
+  currentUser,
   setCurrentUser,
 }) {
   const [currentPage, setCurrentPage] = useState(1)
@@ -33,38 +34,47 @@ export default function Table({
 
   return (
     <>
-      <table className={styles.container}>
-        <thead>
-          <tr>
-            {Object.entries(fieldNames).map((field, i) => (
-              <th
-                key={i}
-                onClick={handleClick(field[0])}
-                className={
-                  field[0] === sorting.field
-                    ? sorting.order === 'ASC'
-                      ? styles.sorted + ' ' + styles.sortedAsc
-                      : styles.sorted + ' ' + styles.sortedDesc
-                    : null
-                }
-              >
-                {field[1]}
-              </th>
-            ))}
-          </tr>
-        </thead>
+      <div className={styles.container}>
+        <table>
+          <thead>
+            <tr>
+              {Object.entries(fieldNames).map((field, i) => (
+                <th
+                  key={i}
+                  onClick={handleClick(field[0])}
+                  className={
+                    field[0] === sorting.field
+                      ? sorting.order === 'ASC'
+                        ? styles.sortedAsc
+                        : styles.sortedDesc
+                      : null
+                  }
+                >
+                  {field[1]}
+                </th>
+              ))}
+            </tr>
+          </thead>
 
-        <tbody>
-          {currentTableData.map((user, i) => (
-            <TableItem
-              key={i}
-              user={user}
-              index={i}
-              setCurrentUser={setCurrentUser}
-            />
-          ))}
-        </tbody>
-      </table>
+          {!!currentTableData.length ? (
+            <tbody>
+              {currentTableData.map((user, i) => (
+                <TableItem
+                  key={i}
+                  user={user}
+                  index={i}
+                  currentUser={currentUser}
+                  setCurrentUser={setCurrentUser}
+                />
+              ))}
+            </tbody>
+          ) : null}
+        </table>
+      </div>
+
+      {!currentTableData.length ? (
+        <div className={styles.nothingFound}>Sorry, nothing found.</div>
+      ) : null}
 
       <Pagination
         currentPage={currentPage}

@@ -1,4 +1,6 @@
-export default function Table({ user, index, setCurrentUser }) {
+import styles from './TableItem.module.sass'
+
+export default function Table({ user, index, currentUser, setCurrentUser }) {
   const {
     id,
     firstName,
@@ -13,7 +15,11 @@ export default function Table({ user, index, setCurrentUser }) {
   }
 
   return (
-    <tr data-index={index} onClick={handleClick}>
+    <tr
+      data-index={index}
+      onClick={handleClick}
+      className={user === currentUser ? styles.currentUser : null}
+    >
       <td>{id}</td>
       <td>{firstName}</td>
       <td>{lastName}</td>

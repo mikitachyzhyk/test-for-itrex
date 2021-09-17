@@ -1,3 +1,21 @@
+@import '_variables'
+
+*::-webkit-input-placeholder
+  color: $inputPlaceholder !important
+  opacity: 1 !important
+
+*:-moz-placeholder
+  color: $inputPlaceholder !important
+  opacity: 1 !important
+
+*::-moz-placeholder
+  color: $inputPlaceholder !important
+  opacity: 1 !important
+
+*:-ms-input-placeholder
+  color: $inputPlaceholder !important
+  opacity: 1 !important
+
 *, *:before, *:after
   box-sizing: border-box
 
@@ -6,8 +24,29 @@ body
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif
   -webkit-font-smoothing: antialiased
   -moz-osx-font-smoothing: grayscale
-  background: #333
-  color: white
+  background: $bgColor
+  color: $textColor
 
 code
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace
+
+input, select
+  height: 40px
+  color: $textColor
+  border-radius: 2px
+
+select
+  padding: 0 10px
+
+input
+  min-width: 300px
+  padding: 0 10px
+  font-size: 15px
+  background: white
+  border: 1px solid transparent
+  border-bottom: 1px solid $bdColor
+  &:focus
+    outline: none
+
+a
+  color: blue
