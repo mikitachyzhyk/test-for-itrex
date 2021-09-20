@@ -2,6 +2,7 @@ import React, { useMemo, useState } from 'react'
 import Pagination from './Pagination/Pagination'
 import TableItem from './TableItem/TableItem'
 import styles from './Table.module.sass'
+import { useEffect } from 'react'
 
 const pageSize = 20
 
@@ -20,6 +21,10 @@ export default function Table({
     const lastPageIndex = firstPageIndex + pageSize
     return users.slice(firstPageIndex, lastPageIndex)
   }, [users, currentPage])
+
+  useEffect(() => {
+    setCurrentPage(1)
+  }, [users])
 
   const handleClick = (field) => {
     return () => {
