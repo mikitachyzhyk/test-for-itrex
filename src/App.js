@@ -53,18 +53,22 @@ function App() {
 
   useEffect(() => {
     setUsers(
-      originalUsers.filter(
-        (user) =>
-          (user.firstName
-            .toLowerCase()
-            .includes(searchText.trim().toLowerCase()) ||
-            user.lastName
+      sort(
+        originalUsers.filter(
+          (user) =>
+            (user.firstName
               .toLowerCase()
-              .includes(searchText.trim().toLowerCase())) &&
-          user.adress.state.toLowerCase().includes(currentState.toLowerCase())
+              .includes(searchText.trim().toLowerCase()) ||
+              user.lastName
+                .toLowerCase()
+                .includes(searchText.trim().toLowerCase())) &&
+            user.adress.state.toLowerCase().includes(currentState.toLowerCase())
+        ),
+        sorting.field,
+        sorting.order
       )
     )
-  }, [originalUsers, currentState, searchText])
+  }, [originalUsers, currentState, searchText, sorting.field, sorting.order])
 
   const handleSearchTextChange = (e) => {
     setSearchText(e.target.value)
@@ -74,20 +78,22 @@ function App() {
     setCurrentState(e.target.value)
   }
 
-  const sortUsers = (field, order = 'ASC') => {
-    const sort = (a, b, order) => {
+  const sort = (users, field, order) => {
+    const toSort = (a, b, order) => {
       if (order === 'ASC') return a > b ? 1 : -1
       else return a > b ? -1 : 1
     }
 
-    setUsers(
-      users.slice().sort((user1, user2) => {
-        if (field === 'state') {
-          return sort(user1.adress[field], user2.adress[field], order)
-        }
-        return sort(user1[field], user2[field], order)
-      })
-    )
+    return users.slice().sort((user1, user2) => {
+      if (field === 'state') {
+        return toSort(user1.adress[field], user2.adress[field], order)
+      }
+      return toSort(user1[field], user2[field], order)
+    })
+  }
+
+  const sortUsers = (field, order = 'ASC') => {
+    setUsers(sort(users, field, order))
 
     setSorting({ field, order })
   }
