@@ -3,6 +3,7 @@ import Pagination from './Pagination/Pagination'
 import TableItem from './TableItem/TableItem'
 import styles from './Table.module.sass'
 import { useEffect } from 'react'
+import { fieldNames } from '../../utils/constants'
 
 const pageSize = 20
 
@@ -10,7 +11,6 @@ export default function Table({
   users,
   sortUsers,
   sorting,
-  fieldNames,
   currentUser,
   setCurrentUser,
 }) {

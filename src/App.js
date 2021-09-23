@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import Filter from './components/Filter/Filter'
-import Search from './components/Search/Search'
-import Table from './components/Table/Table'
+import Filter from './features/Filter/Filter'
+import Search from './features/Search/Search'
+import Table from './features/Table/Table'
 import styles from './App.module.sass'
-import ProfileInfo from './components/ProfileInfo/ProfileInfo'
+import ProfileInfo from './features/ProfileInfo/ProfileInfo'
 
 function App() {
   const [originalUsers, setOriginalUsers] = useState([])
@@ -35,15 +35,6 @@ function App() {
   const [sorting, setSorting] = useState({
     field: 'id',
     order: 'ASC',
-  })
-
-  const [fieldNames] = useState({
-    id: 'id',
-    firstName: 'First name',
-    lastName: 'Last name',
-    email: 'Email',
-    phone: 'Phone',
-    state: 'State',
   })
 
   const [searchText, setSearchText] = useState('')
@@ -118,7 +109,6 @@ function App() {
         users={users}
         sortUsers={sortUsers}
         sorting={sorting}
-        fieldNames={fieldNames}
         currentUser={currentUser}
         setCurrentUser={setCurrentUser}
       />
