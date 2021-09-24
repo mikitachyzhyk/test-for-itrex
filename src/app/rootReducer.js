@@ -5,6 +5,14 @@ export const rootSlice = createSlice({
   initialState: {
     originalUsers: [],
     users: [],
+    sorting: {
+      field: 'id',
+      order: 'ASC',
+    },
+    searchText: '',
+    nationStateList: [],
+    currentNationState: '',
+    currentUser: null,
   },
   reducers: {
     // Redux Toolkit allows us to write "mutating" logic in reducers. It
@@ -20,10 +28,36 @@ export const rootSlice = createSlice({
     // incrementByAmount: (state, action) => {
     //   state.value += action.payload
     // },
+    setOriginalUsers: (state, action) => {
+      state.originalUsers = action.payload
+    },
+    setUsers: (state, action) => {
+      state.users = action.payload
+    },
+    setSorting: (state, action) => {
+      state.sorting = action.payload
+    },
+    setSearchText: (state, action) => {
+      state.searchText = action.payload
+    },
+    setNationStateList: (state, action) => {
+      state.nationStateList = action.payload
+    },
+    setCurrentNationState: (state, action) => {
+      state.currentNationState = action.payload
+    },
   },
 })
 
 // Action creators are generated for each case reducer function
 // export const { increment, decrement, incrementByAmount } = rootSlice.actions
+export const {
+  setOriginalUsers,
+  setUsers,
+  setSorting,
+  setSearchText,
+  setNationStateList,
+  setCurrentNationState,
+} = rootSlice.actions
 
 export default rootSlice.reducer

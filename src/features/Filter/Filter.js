@@ -2,8 +2,8 @@ import styles from './Filter.module.sass'
 
 export default function Filter({
   handleFilterChange,
-  currentState,
-  stateList,
+  currentNationState,
+  nationStateList,
 }) {
   return (
     <div className={styles.container}>
@@ -11,10 +11,10 @@ export default function Filter({
       <select
         id="filterByState"
         onChange={handleFilterChange}
-        value={currentState}
+        value={currentNationState}
       >
         <option value="">all</option>
-        {stateList.map((state, i) => (
+        {nationStateList.map((state, i) => (
           <option key={i} value={state}>
             {state}
           </option>
