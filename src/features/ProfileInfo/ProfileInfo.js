@@ -1,6 +1,9 @@
+import { useSelector } from 'react-redux'
 import styles from './ProfileInfo.module.sass'
 
-export default function ProfileInfo({ currentUser }) {
+export default function ProfileInfo() {
+  const currentUser = useSelector((state) => state.app.currentUser)
+
   const {
     firstName,
     lastName,

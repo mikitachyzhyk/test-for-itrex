@@ -1,6 +1,11 @@
+import { useDispatch, useSelector } from 'react-redux'
+import { setCurrentUser } from '../../../app/rootReducer'
 import styles from './TableItem.module.sass'
 
-export default function Table({ user, index, currentUser, setCurrentUser }) {
+export default function Table({ user, index }) {
+  const currentUser = useSelector((state) => state.app.currentUser)
+  const dispatch = useDispatch()
+
   const {
     id,
     firstName,
@@ -11,7 +16,7 @@ export default function Table({ user, index, currentUser, setCurrentUser }) {
   } = user
 
   function handleClick(e) {
-    setCurrentUser(user)
+    dispatch(setCurrentUser(user))
   }
 
   return (

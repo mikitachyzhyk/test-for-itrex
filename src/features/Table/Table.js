@@ -1,19 +1,29 @@
-import React, { useMemo, useState } from 'react'
-import Pagination from './Pagination/Pagination'
-import TableItem from './TableItem/TableItem'
-import styles from './Table.module.sass'
-import { useEffect } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import {
+  setResetToFirstPage,
+  setSorting,
+  setUsers,
+} from '../../app/rootReducer'
 import { fieldNames } from '../../utils/constants'
+import { sortUsersByField } from '../../utils/helpers'
+import Pagination from './Pagination/Pagination'
+import styles from './Table.module.sass'
+import TableItem from './TableItem/TableItem'
 
 const pageSize = 20
 
-export default function Table({
-  users,
-  sortUsers,
-  sorting,
-  currentUser,
-  setCurrentUser,
-}) {
+export default function Table() {
+  const users = useSelector((state) => state.app.users)
+  const sorting = useSelector((state) => state.app.sorting)
+  const resetToFirstPage = useSelector((state) => state.app.resetToFirstPage)
+  const dispatch = useDispatch()
+
+  const sortUsers = (field, order = 'ASC') => {
+    dispatch(setUsers(sortUsersByField(users, field, order)))
+    dispatch(setSorting({ field, order }))
+  }
+
   const [currentPage, setCurrentPage] = useState(1)
 
   const currentTableData = useMemo(() => {
@@ -23,7 +33,10 @@ export default function Table({
   }, [users, currentPage])
 
   useEffect(() => {
-    setCurrentPage(1)
+    if (resetToFirstPage) {
+      setCurrentPage(1)
+      dispatch(setResetToFirstPage(false))
+    }
   }, [users])
 
   const handleClick = (field) => {
@@ -64,13 +77,7 @@ export default function Table({
           {!!currentTableData.length ? (
             <tbody>
               {currentTableData.map((user, i) => (
-                <TableItem
-                  key={i}
-                  user={user}
-                  index={i}
-                  currentUser={currentUser}
-                  setCurrentUser={setCurrentUser}
-                />
+                <TableItem key={i} user={user} index={i} />
               ))}
             </tbody>
           ) : null}

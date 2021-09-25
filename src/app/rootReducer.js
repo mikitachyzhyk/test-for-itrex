@@ -13,6 +13,7 @@ export const rootSlice = createSlice({
     nationStateList: [],
     currentNationState: '',
     currentUser: null,
+    resetToFirstPage: false,
   },
   reducers: {
     // Redux Toolkit allows us to write "mutating" logic in reducers. It
@@ -46,6 +47,12 @@ export const rootSlice = createSlice({
     setCurrentNationState: (state, action) => {
       state.currentNationState = action.payload
     },
+    setCurrentUser: (state, action) => {
+      state.currentUser = action.payload
+    },
+    setResetToFirstPage: (state, action) => {
+      state.resetToFirstPage = action.payload
+    },
   },
 })
 
@@ -58,6 +65,8 @@ export const {
   setSearchText,
   setNationStateList,
   setCurrentNationState,
+  setCurrentUser,
+  setResetToFirstPage,
 } = rootSlice.actions
 
 export default rootSlice.reducer
